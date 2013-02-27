@@ -1,6 +1,28 @@
 # coding=utf-8
 import urllib, re, sys, threading, cookielib, urllib2
 from BeautifulSoup import BeautifulSoup
+### Головная функция
+def main():
+    agent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)'
+    aCarnage = Carnage('YourNick', 'YourPass', 'arkaim.carnage.ru', 'cp1251', agent)
+    aCarnage.login()
+    me = aCarnage.inf(aCarnage.user)
+    # Если ранен - выйти
+    if me['inj']:
+        aCarnage.logout()
+        exit(1)
+    aCarnage.urlopen('main.pl')
+    # Подождать пока здоровье восстановится
+    while(me['hp_wait']):
+        time.sleep(me['hp_wait'])
+        me = aCarnage.inf(aCarnage.user)
+    # Найти подходящую заявку
+    aCarnage.find()
+    me = aCarnage.inf(aCarnage.user)
+    # Если заявка состоялась - в бой!
+    if me['battle']: aCarnage.fight()
+    # После боя - выход из игры
+    aCarnage.logout()
 class Opener:
     def __init__(self, host, encoding, agent):
         self.host = host
@@ -104,26 +126,4 @@ class CarnageBot(Opener):
         nd = self.soup.find('input', {'name' : 'nd', 'type' : 'hidden'})
         self.urlopen('zayavka.pl?cmd=haot.accept&nd=%s&battle_id=%s' % (nd['value'], v))
         time.sleep(t + 30)
-### Головная функция
-def main():
-    agent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)'
-    aCarnage = Carnage('YourNick', 'YourPass', 'arkaim.carnage.ru', 'cp1251', agent)
-    aCarnage.login()
-    me = aCarnage.inf(aCarnage.user)
-    # Если ранен - выйти
-    if me['inj']:
-        aCarnage.logout()
-        exit(1)
-    aCarnage.urlopen('main.pl')
-    # Подождать пока здоровье восстановится
-    while(me['hp_wait']):
-        time.sleep(me['hp_wait'])
-        me = aCarnage.inf(aCarnage.user)
-    # Найти подходящую заявку
-    aCarnage.find()
-    me = aCarnage.inf(aCarnage.user)
-    # Если заявка состоялась - в бой!
-    if me['battle']: aCarnage.fight()
-    # После боя - выход из игры
-    aCarnage.logout()
 if __name__ == '__main__': main()
