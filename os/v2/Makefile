@@ -19,4 +19,3 @@ install: all
 	rm -f loader.bin
 	rm -f kernel.bin
 	rm -f *.o
-
