@@ -1,129 +1,100 @@
 <?php
-    /* "AS IS" GENERATOR */
+    defined('GENERATOR_DB') or trigger_error('GENERATOR_DB is not defined!', E_USER_ERROR);
+    is_file(GENERATOR_DB) or trigger_error('GENERATOR_DB is not a file!', E_USER_ERROR);
     class Generator {
-        private static function checkSquareBrackets($string) {
+        private static function syntax($string, $generator) {
+            if(!$string) return '';
+            $check = $string;
+            $string = preg_replace_callback('/@([a-z0-9_]+)/', function($m) use($generator) {
+                if(!isset($generator[$m[1]])) return '';
+                $generator = nsplit($generator[$m[1]]);
+                $generator = '[' . implode('|', $generator) . ']';
+                return $generator;
+            }, $string);
+            if($check === $string) ; else return self::syntax($string, $generator);
             $depth = 0;
+            $alt = array();
+            $collector = '';
             for($i = 0; $i < strlen($string); $i++) {
                 $char = $string[$i];
-                $depth += $char === '[';
-                $depth -= $char === ']';
-                if($depth < 0) break;
+                if($char === '[') $depth += 1;
+                if($char === ']') $depth -= 1;
+                if($char === '|' and $depth === 0) {
+                    $alt[] = $collector;
+                    $collector = '';
+                } else $collector .= $char;
             }
-            if($depth) return false;
-            return true;
-        }
-        private static function syntaxSquareBrackets($string) {
-            if(!self::checkSquareBrackets($string)) return '';
-            return preg_replace_callback('#\[(([^\[\]]+|(?R))*)\]#', function($m) {
-                $depth = 0;
-                $alt = array();
-                $collector = '';
-                for($i = 0; $i < strlen($m[1]); $i++) {
-                    $char = $m[1][$i];
-                    $depth += $char === '[';
-                    $depth -= $char === ']';
-                    if($depth === 0 and $char === '|') {
+            $alt[] = $collector;
+            $collector = '';
+            $alt = array_map(function($elem) {
+                $match = array();
+                if(preg_match('|(.*)\(([a-z0-9_,]+)\)$|', $elem, $match)) {
+                    $paren = explode(',', $match[2]);
+                    $array = array(array(), array());
+                    foreach($paren as $elem)
+                        if(is_numeric($elem)) $array[0][] = $elem;
+                        else $array[1][] = $elem;
+                    if(isset($array[0][0]))
+                        return array($match[1], $array[0][0], $array[1]);
+                    return array($match[1], 1, $array[1]);
+                }
+                return array($elem, 1, array());
+            }, $alt);
+            reset($alt);
+            $choser = array();
+            while(list(, list($elem, $count, $call)) = each($alt))
+                for($i = 0; $i < $count; $i++)
+                    $choser[] = array($elem, $call);
+            if(!count($choser)) return '';
+            list($elem, $call) = $choser[mt_rand(0, count($choser) - 1)];
+            unset($choser);
+            //
+            $depth = 0;
+            $alt = array();
+            $collector = '';
+            for($i = 0; $i < strlen($elem); $i++) {
+                $char = $elem[$i];
+                if($char === '[') {
+                    if($depth === 0) {
                         $alt[] = $collector;
                         $collector = '';
                     } else $collector .= $char;
-                }
-                $alt[] = $collector;
-                $alt = array_map(function($elem) {
-                    $match = array();
-                    if(preg_match('|(.*)\(([0-9]+)\)|', $elem, $match))
-                        return array($match[1], $match[2]);
-                    return array($elem, 1);
-                }, $alt);
-                reset($alt);
-                $choser = array();
-                while(list(, list($elem, $count)) = each($alt))
-                    for($i = 0; $i < $count; $i++)
-                        $choser[] = $elem;
-                return $choser[mt_rand(0, count($choser) - 1)];
-            }, $string);
-        }
-        /*
-        private static function syntaxDoubleAt($string) {
-            $GENERATOR = include GENERATOR_DB;
-            return preg_replace_callback('/\(@@([A-Za-z0-9_]+)\)/', function($m) use($GENERATOR) {
-                if(!isset($GENERATOR[$m[1]])) return '(0)';
-                return '(' . count(nsplit($GENERATOR[$m[1]])) . ')';
-            }, $string);
-        }
-        */
-        private static function syntaxAt($string) {
-            $GENERATOR = include GENERATOR_DB;
-            return preg_replace_callback('/@([A-Za-z0-9_]+)/', function($m) use($GENERATOR) {
-                if(!isset($GENERATOR[$m[1]])) return '';
-                $generator = nsplit($GENERATOR[$m[1]]);
-                return '<!-- ' . $generator[mt_rand(0, count($generator) - 1)] . ' -->';
-            }, $string);
-        }
-        private static function syntax($string) {
-            //echo $string, chr(10);
-            do {
-                $old = $string;
-                //$check = $string;
-                $string = self::syntaxSquareBrackets($string);
-                //if($check !== $string) {
-                    //echo $string, chr(10);
-                //    $check = $string;
-                //}
-                $string = self::syntaxAt($string);
-                //if($check !== $string) {
-                    //echo $string, chr(10);
-                //    $check = $string;
-                //}
-            } while($old !== $string);
-            return $string;
-        }
-        public static function generateComment($comment = '@comment') {
-            $comment = self::syntax($comment);
-            $comment = preg_replace('/<!-- | -->/', '', $comment);
-            $comment = preg_replace_callback('/^[a-z]/', function($m) { return strtoupper($m[0]); }, $comment);
-            $comment = preg_replace('/\s+/', ' ', $comment);
-            $comment = trim($comment);
-            return $comment;
-            ;
-
-            $comment = array();
-            $frame = $frame[mt_rand(0, count($frame) - 1)];
-            $transform = $transform[mt_rand(0, count($transform) - 1)];
-            foreach(explode(',', $frame) as $f) {
-                $f = trim($f);
-                if(!$f) continue;
-                if(preg_match('|(.*?)\s*\(([0-9]+)\)|', $f, $match))
-                    if(mt_rand(1, 100) > intval($match[2]))
-                        continue;
-                    else
-                        $f = $match[1];
-                if(!isset($GENERATOR[$f])) continue;
-                $stack = nsplit($GENERATOR[$f]);
-                $comment[] = $stack[mt_rand(0, count($stack) - 1)];
+                    $depth += 1;
+                } elseif($char === ']') {
+                    if($depth === 1) {
+                        $alt[] = $collector;
+                        $collector = '';
+                    } else $collector .= $char;
+                    $depth -= 1;
+                } else $collector .= $char;
             }
-            $comment = implode($glue, $comment);
-            foreach(explode(',', $prettify) as $p) {
-                $p = trim($p);
-                if(!$p) continue;
-                echo $p, chr(10);
-                if(preg_match('|(.*?)\s*\(([0-9]+)\)|', $p, $match))
-                    if(is_callable($call = array(get_class(), 'transform' . ucfirst($match[1]))))
-                        $comment = call_user_func_array($call, array($comment, $match[2]));
+            $alt[] = $collector;
+            $collector = '';
+            if($depth) {
+                trigger_error("ERROR - {$string}", E_USER_NOTICE);
+                return '';
             }
-            return $comment;
+            foreach(array_keys($alt) as $key)
+                if(
+                    strpos($alt[$key], ']') === false and
+                    strpos($alt[$key], '[') === false and
+                    strpos($alt[$key], '|') === false and
+                    !preg_match('|\(([a-z0-9_,]+)\)$|', $alt[$key])
+                ) ; else $alt[$key] = self::syntax($alt[$key], $generator);
+            $elem = implode('', $alt);
+            foreach($call as $c)
+                if(is_callable($c))
+                    $elem = call_user_func($c, $elem);
+                elseif(isset($generator['callstack'][$c]) and is_callable($generator['callstack'][$c]))
+                    $elem = call_user_func($generator['callstack'][$c], $elem);
+            return $elem;
         }
-        public static function transformKeyboard($p, $chance) {
-            return preg_replace_callback('|[a-z_-]+|i', function($match) use($chance) {
-                $match = $match[0];
-                if(strlen($match) < 5) return $match;
-                if(mt_rand(1, 100) > $chance)
-                    return $match;
-                $index = mt_rand(1, count($match) - 3);
-                $letter = $match[$index];
-                $match[$index] = $match[$index + 1];
-                $match[$index + 1] = $letter;
-                echo $match, chr(10);
-                return $match;
-            }, $p);
+        public static function generate($string, $generator = array()) {
+            if(!$string) return null;
+            $string = "[{$string}]";
+            $GENERATOR = include GENERATOR_DB;
+            $generator = array_merge($GENERATOR, $generator);
+            if(!isset($generator['callstack'])) $generator['callstack'] = array();
+            return self::syntax($string, $generator);
         }
     }
