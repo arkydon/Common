@@ -7,6 +7,7 @@
             @ $verbose = intval($settings['verbose']);
             @ $loadImages = $settings['loadImages'];
             @ $noSecurity = $settings['noSecurity'];
+            @ $cookie = $settings['cookie'];
             if($scp and $scp != '/') $scp = rtrim($scp, '/');
             else $scp = '/tmp';
             if(!$ua) $ua = getUserAgent();
@@ -110,7 +111,8 @@
             file_put_contents($file, $script);
             trigger_error("WRITE SCRIPT TO {$file}", E_USER_NOTICE);
             $ws = $noSecurity ? '--web-security=no' : '';
-            $cmd = "casperjs {$ws} --output-encoding=utf8 '{$file}' 2>&1";
+            $cf = $cookie ? "--cookies-file=\"/tmp/casper.cookie." . rand_from_string($cookie) . '"' : '';
+            $cmd = "casperjs {$cf} {$ws} --output-encoding=utf8 '{$file}' 2>&1";
             trigger_error($cmd, E_USER_NOTICE);
             $pipe = popen($cmd, 'r');
             $content = '';
