@@ -155,11 +155,12 @@
         trigger_error('INVALID PROXY', E_USER_ERROR);
     }
     // ua getter
-    function getUserAgent() {
+    function getUserAgent($seed = null) {
+        if($seed === null) $seed = rand_from_string(microtime(true));
         $UA_LIST = LIST_PATH . '/ua.list';
         $list = file_get_contents($UA_LIST);
         $list = nsplit($list);
-        $ua = $list[mt_rand(0, count($list) - 1)];
+        $ua = $list[$seed % count($list)];
         if($ua) return $ua;
         trigger_error('INVALID UA', E_USER_ERROR);
     }
