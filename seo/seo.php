@@ -133,7 +133,7 @@
     }
     // awmproxy.com getter
     function getProxy() {
-        $PROXY_LIST = LIST_PATH . '/proxy.list';
+        $PROXY_LIST = LIST_ROOT . '/proxy.list';
         $PROXY_LIST_URL = 'http://awmproxy.com/701proxy.txt';
         $PROXY_LIST_TIMEOUT = 3600;
         $PROXY_LOGIN = 'login';
@@ -157,7 +157,7 @@
     // ua getter
     function getUserAgent($seed = null) {
         if($seed === null) $seed = rand_from_string(microtime(true));
-        $UA_LIST = LIST_PATH . '/ua.list';
+        $UA_LIST = LIST_ROOT . '/ua.list';
         $list = file_get_contents($UA_LIST);
         $list = nsplit($list);
         $ua = $list[$seed % count($list)];
