@@ -1,6 +1,6 @@
 <?php
     class Casper {
-        public static function go($url, $script, $settings = array()) {
+        public static function go($url, $script = '', $settings = array()) {
             @ $ua = $settings['ua'];
             @ $echo = $settings['echo'];
             @ $scp = $settings['scp'];
