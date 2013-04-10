@@ -93,6 +93,25 @@
                 $elem = call_user_func($generator['callstack'][$c], $elem);
         return $elem;
     }
+    // Закачать файл с помощью wget
+    function load_file($url, $dir, $proxy = false) {
+        $ext = file_get_ext($url);
+        $name = file_get_name($url);
+        if(strlen($ext) > 4 or !$name) {
+            trigger_error("INVALID EXT OR NAME - {$url}", E_USER_WARNING);
+            return null;
+        }
+        $img = wget($url, $proxy);
+        if(!$img) {
+            trigger_error("WARNING - {$url} was not loaded!", E_USER_WARNING);
+            return null;
+        }
+        $name = "{$name}.{$ext}";
+        $dir = rtrim($dir, '/');
+        if(!is_dir($dir)) exec("mkdir -p '{$dir}'");
+        file_put_contents("{$dir}/{$name}", $img);
+        return $name;
+    }
     // Получить страницу через wget
     function wget($url, $proxy = false, $start = 2) {
         while($start--):
