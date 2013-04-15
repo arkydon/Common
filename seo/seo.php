@@ -1,11 +1,11 @@
 <?php
     // Генератор
-    function generator($string = null, $generator = array(), $recursive = false) {
+    function generator($string = null, $generator = array(), $seed = null, $recursive = false) {
         if($recursive === false) {
             if(!$string) return null;
             $string = "[{$string}]";
             if(!isset($generator['callstack'])) $generator['callstack'] = array();
-            return generator($string, $generator, true);
+            return generator($string, $generator, $seed, true);
         }
         if(!$string) return '';
         $check = $string;
@@ -50,7 +50,9 @@
             for($i = 0; $i < $count; $i++)
                 $choser[] = array($elem, $call);
         if(!count($choser)) return '';
-        list($elem, $call) = $choser[mt_rand(0, count($choser) - 1)];
+        if($seed === null) $seed = rand_from_string(microtime(true));
+        else $seed = rand_from_string($seed);
+        list($elem, $call) = $choser[$seed % count($choser)];
         unset($choser);
         //
         $depth = 0;
@@ -84,7 +86,7 @@
                 strpos($alt[$key], '[') === false and
                 strpos($alt[$key], '|') === false and
                 !preg_match('|\(([a-z0-9_,]+)\)$|', $alt[$key])
-            ) ; else $alt[$key] = generator($alt[$key], $generator, true);
+            ) ; else $alt[$key] = generator($alt[$key], $generator, $seed, true);
         $elem = implode('', $alt);
         foreach($call as $c)
             if(is_callable($c))
@@ -176,6 +178,7 @@
     // ua getter
     function getUserAgent($seed = null) {
         if($seed === null) $seed = rand_from_string(microtime(true));
+        else $seed = rand_from_string($seed);
         $UA_LIST = LIST_ROOT . '/ua.list';
         $list = file_get_contents($UA_LIST);
         $list = nsplit($list);
