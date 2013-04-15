@@ -8,6 +8,7 @@
             return generator($string, $generator, $seed, true);
         }
         if(!$string) return '';
+        // @
         $check = $string;
         $string = preg_replace_callback('/@([a-z0-9_]+)/', function($m) use($generator) {
             if(!isset($generator[$m[1]])) return '';
@@ -15,7 +16,15 @@
             $generator = '[' . implode('|', $generator) . ']';
             return $generator;
         }, $string);
-        if($check === $string) ; else return generator($string, $generator, true);
+        if($check === $string) ; else return generator($string, $generator, $seed, true);
+        // @@
+        $check = $string;
+        $string = preg_replace_callback('/@@"([^"]+?)"/', function($m) {
+            if(!is_file(LIST_ROOT . '/' . $m[1])) return '';
+            return '[' . implode('|', nsplit(file_get_contents(LIST_ROOT . '/' . $m[1]))) . ']';
+        }, $string);
+        if($check === $string) ; else return generator($string, $generator, $seed, true);
+        //
         $depth = 0;
         $alt = array();
         $collector = '';
@@ -50,9 +59,9 @@
             for($i = 0; $i < $count; $i++)
                 $choser[] = array($elem, $call);
         if(!count($choser)) return '';
-        if($seed === null) $seed = rand_from_string(microtime(true));
-        else $seed = rand_from_string($seed);
-        list($elem, $call) = $choser[$seed % count($choser)];
+        if($seed === null) $SEED = rand_from_string(microtime(true));
+        else $SEED = rand_from_string($seed);
+        list($elem, $call) = $choser[$SEED % count($choser)];
         unset($choser);
         //
         $depth = 0;
