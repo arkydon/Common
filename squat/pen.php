@@ -1,7 +1,5 @@
 <?php
     function CLI_squat_go() {
-        // var_dump(Whois::lookup('pen.org'));
-        // return;
         while(true):
         $lexeme = array(
             'buy' => '[buy|kupi|kupiti|pokupay]',
