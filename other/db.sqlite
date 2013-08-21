@@ -17,14 +17,14 @@ CREATE TABLE `purchase` (
     `good_id` INTEGER NOT NULL,
     `stamp` VARCHAR(255) NOT NULL
 );
-INSERT INTO `user` SET `user` = 'Ivan', `city` = 'Saint Petersburg';
-INSERT INTO `user` SET `user` = 'Vladimir', `city` = 'Saint Petersburg';
-INSERT INTO `user` SET `user` = 'Gulnara', `city` = 'Saint Petersburg';
-INSERT INTO `user` SET `user` = 'Vera', `city` = 'Moscow';
-INSERT INTO `user` SET `user` = 'Igor', `city` = 'Vologda';
-INSERT INTO `user` SET `user` = 'Sveta', `city` = 'Vologda';
-INSERT INTO `good` SET `name` = 'Barbie';
-INSERT INTO `good` SET `name` = 'Ken';
-INSERT INTO `purchase` SET `user_id` = '1', `good_id` = '1';
-INSERT INTO `purchase` SET `user_id` = '4', `good_id` = '1';
-INSERT INTO `purchase` SET `user_id` = '4', `good_id` = '2';
+INSERT INTO `user` (`user`, `city`) VALUES ('Ivan', 'Saint Petersburg');
+INSERT INTO `user` (`user`, `city`) VALUES ('Vladimir', 'Saint Petersburg');
+INSERT INTO `user` (`user`, `city`) VALUES ('Gulnara', 'Saint Petersburg');
+INSERT INTO `user` (`user`, `city`) VALUES ('Vera', 'Moscow');
+INSERT INTO `user` (`user`, `city`) VALUES ('Igor', 'Vologda');
+INSERT INTO `user` (`user`, `city`) VALUES ('Sveta', 'Vologda');
+INSERT INTO `good` (`name`) VALUES ('Barbie');
+INSERT INTO `good` (`name`) VALUES ('Ken');
+INSERT INTO `purchase` (`user_id`, `good_id`) VALUES ('1', '1');
+INSERT INTO `purchase` (`user_id`, `good_id`) VALUES ('4', '1');
+INSERT INTO `purchase` (`user_id`, `good_id`) VALUES ('4', '2');
