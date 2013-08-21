@@ -1,0 +1,27 @@
+CREATE TABLE `user` (
+    `user_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    `user` VARCHAR(255) UNIQUE NOT NULL DEFAULT '',
+    `passwd` VARCHAR(255) NOT NULL DEFAULT '',
+    `city` VARCHAR(255) NOT NULL DEFAULT ''
+);
+CREATE TABLE `good` (
+    `good_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    `name` VARCHAR(255) NOT NULL DEFAULT ''
+);
+CREATE TABLE `purchase` (
+    `purchase_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    `user_id` INTEGER NOT NULL,
+    `good_id` INTEGER NOT NULL,
+    `stamp` VARCHAR(255) NOT NULL
+);
+INSERT INTO `user` SET `user` = 'Ivan', `city` = 'Saint Petersburg';
+INSERT INTO `user` SET `user` = 'Vladimir', `city` = 'Saint Petersburg';
+INSERT INTO `user` SET `user` = 'Gulnara', `city` = 'Saint Petersburg';
+INSERT INTO `user` SET `user` = 'Vera', `city` = 'Moscow';
+INSERT INTO `user` SET `user` = 'Igor', `city` = 'Vologda';
+INSERT INTO `user` SET `user` = 'Sveta', `city` = 'Vologda';
+INSERT INTO `good` SET `name` = 'Barbie';
+INSERT INTO `good` SET `name` = 'Ken';
+INSERT INTO `purchase` SET `user_id` = '1', `good_id` = '1';
+INSERT INTO `purchase` SET `user_id` = '4', `good_id` = '1';
+INSERT INTO `purchase` SET `user_id` = '4', `good_id` = '2';
