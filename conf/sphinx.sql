@@ -22,7 +22,6 @@ INSERT INTO doc (title, author, counter) VALUES
 ('Fabulous Histories', 'Sarah Trimmer', 690),
 ('The History of Little Jack', 'Thomas Day', 170),
 ('Original Stories from Real Life', 'Mary Wollstonecraft', 120),
-('The Parent's Assistant', 'Maria Edgeworth', 900),
 ('Keeper’s Travels in Search of His Master', 'Edward Augustus Kendall', 200),
 ('The Rational Brutes', 'Dorothy Kilner', 900),
 ('Moral Tales for Young People', 'Maria Edgeworth', 670);
