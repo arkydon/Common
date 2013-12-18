@@ -69,4 +69,4 @@ var server = http.createServer(function(request, response) {
         socketRequest.on('end', function() { socket.end() })
         socketRequest.on('error', function() { socket.end() })
     }).end()
-}).listen(8080)
+}).listen(8080, '127.0.0.1')
