@@ -1,5 +1,6 @@
 var assert = require('assert')
 var gateway = 'proxy://login:passwd@10.20.30.40:3128/' // Прокси для редиректа
+if(process.env.gateway) gateway = process.env.gateway
 var http = require('http')
 var net = require('net')
 var url = require('url')
