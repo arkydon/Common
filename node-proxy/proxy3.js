@@ -13,7 +13,7 @@ var server = http.createServer(function(request, response) {
         hostname: gw.hostname,
         method: request.method,
         path: request.url,
-        headers: request.headers
+        headers: request.headers || {}
     }
     if(gw.auth)
         options.headers['Proxy-Authorization'] = 'Basic ' + new Buffer(gw.auth).toString('base64')
@@ -45,7 +45,7 @@ var server = http.createServer(function(request, response) {
         hostname: gw.hostname,
         method: 'CONNECT',
         path: ph.hostname + ':' + (ph.port || 80),
-        headers: request.headers
+        headers: request.headers || {}
     }
     if(gw.auth)
         options.headers['Proxy-Authorization'] = 'Basic ' + new Buffer(gw.auth).toString('base64')
