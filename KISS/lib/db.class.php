@@ -330,6 +330,13 @@
         }
         public function listing() {
             $listing = $this -> listing;
+            if(!is_array($listing)) {
+                trigger_error("USED DEFAULT CONFIGURATION", E_USER_WARNING);
+                $listing = array(
+                    'type' => 'byid',
+                    'limit' => 1000
+                );
+            }
             $args = func_get_args();
             if(!count($args) or !$this -> isTable($args[0]))
                 trigger_error("INVALID ARGS WHILE LISTING", E_USER_ERROR);
