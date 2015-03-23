@@ -1,0 +1,126 @@
+/* DEFAULT BEGIN */
+html, body, div, table { margin:0px; padding:0px; font-family:tahoma; font-size:12px; }
+._left { float:left; }
+._right { float:right; }
+._clear { clear:both; }
+._center { margin-left:auto; margin-right:auto; }
+._block { display:block; }
+._inline { display:inline; }
+._hide { display:none; }
+._hidden { visibility:hidden; }
+._visible { visibility:visible; }
+a.a_hover_underline { text-decoration:none; }
+a.a_hover_underline:hover { text-decoration:underline; }
+/* DEFAULT END */
+/* CTABLE BEGIN */
+table.ctable th {
+    background-color:#f0f0f0;
+    border-bottom:1px solid #bbbbbb;
+    border-right:1px solid #e3e3e3;
+    color:#000000;
+    padding:10px 5px;
+    text-align:center;
+    text-shadow:1px 1px #ffffff;
+    vertical-align: middle;
+}
+table.ctable td {
+    background-color:#ffffff;
+    border-bottom:1px solid #d0d0d0;
+    border-right:1px solid #f0f0f0;
+    padding:3px;
+}
+table.ctable a {
+    color:#0b5b81;
+    text-decoration:none;
+}
+table.ctable a:hover {
+    color:#0b5b81;
+    text-decoration:underline;
+}
+table.ctable_yellow tr td { background-color:#fffcd3; }
+table.ctable_yellow_hover tr:hover td { background-color:#fffcd3; }
+table.ctable_green tr td { background-color:#e0ffe0; }
+table.ctable_green_hover tr:hover td { background-color:#e0ffe0; }
+table.ctable_red tr td { background-color:#ffe0e0; }
+table.ctable_red_hover tr:hover td { background-color:#ffe0e0; }
+table.ctable_blue tr td { background-color:#e0e0ff; }
+table.ctable_blue_hover tr:hover td { background-color:#e0e0ff; }
+/* CTABLE END */
+/* CFORM BEGIN */
+form.cform {
+    /*width:700px;*/
+    padding:24px 24px 0;
+    /*margin:200px auto 0;*/
+    background:#fefefe;
+    border:1px solid #cad8de;
+    border-radius:4px;
+    box-shadow:0 1px 2px rgba(0, 0, 0, 0.08);
+    font:14px/18px Arial, Tahoma, sans-serif;
+    color:#444;
+}
+form.cform .field {
+    margin:0 0 18px;
+}
+form.cform .field label {
+    display:block;
+    margin:0 0 11px;
+}
+form.cform .field .input {
+    border-radius:4px;
+}
+form.cform .field input, form.cform .field textarea {
+    font:13px Arial, Tahoma, sans-serif;
+    color:#444;
+    width:662px;
+    padding:9px 13px;
+    border:1px solid #d2d9dc;
+    border-radius:3px;
+    box-shadow:inset 2px 2px 6px #EBEBEB, 0 0 0 5px #F7F9FA;
+    outline:none;
+}
+form.cform .field select {
+    width:690px;
+}
+form.cform .field textarea { height:400px; }
+form.cform div.bar { margin:0 0 11px; }
+form.cform .field input:focus, form.cform .field textarea:focus {
+    border-color:#b7d4ea;
+    box-shadow:inset 2px 2px 6px #ebebeb, 0 0 4px #d0e6f6, 0 0 0 5px #f2f8fc;
+}
+form.cform .submit {
+    overflow:hidden;
+    margin:30px -24px 0;
+    padding:22px 24px;
+    background:#f0f5f7;
+    border-top:1px solid #dde0e8;
+    border-radius:0 0 4px 4px;
+    box-shadow:inset 0 1px #fff, inset -1px -1px #f7fafb, inset 1px 0 #f7fafb;
+    font-size:11px;
+}
+form.cform .submit button {
+    float:right;
+    padding:6px 20px;
+    height:30px;
+    border-top:1px solid #98cce7;
+    border-bottom:1px solid #7db0cc;
+    border-left:1px solid #8cbfd9;
+    border-right:1px solid #8cbfd9;
+    border-radius:15px;
+    color:#fff;
+    font:bold 13px Arial, Tahoma, sans-serif;
+    box-shadow:inset 0 1px #D4EBF7, 0 1px 3px #B8BEBE;
+    background:-moz-linear-gradient(top, #badff3 0%, #7acbed 100%);
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #badff3), color-stop(100%, #7acbed));
+    background:-webkit-linear-gradient(top,  #badff3 0%, #7acbed 100%);
+    background:-o-linear-gradient(top,  #badff3 0%, #7acbed 100%);
+    background:-ms-linear-gradient(top,  #badff3 0%, #7acbed 100%);
+    background:linear-gradient(top,  #badff3 0%, #7acbed 100%);
+    background-color:#9fd7f0;
+    cursor:pointer;
+    text-shadow:0 -1px rgba(0, 0, 0, 0.15);
+    outline:none;
+}
+form.cform .submit button::-moz-focus-inner { border:0; }
+/* CFORM END*/
+/* YOUR STYLES BEGIN */
+/* YOUR STYLES END */
