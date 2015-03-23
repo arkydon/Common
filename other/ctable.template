@@ -1,0 +1,97 @@
+<?
+    $regex = '/{([A-Za-z_0-9|]+?)}/';
+    @ $context = array_filter($table['context']);
+    @ $data = $table['data'];
+    @ $no_table = $table['no_table'];
+    @ $no_th = $table['no_th'];
+    @ $header = $table['header'];
+    @ $class = $table['class'];
+    @ $style = $table['style'];
+    @ $extra = $table['extra'] ? $table['extra'] : array();
+    @ $show_even_if_no_data = $table['show_even_if_no_data'];
+    @ $tr_decorator = is_callable($table['tr_decorator']) ? $table['tr_decorator'] : null;
+    $data = array_filter($data);
+    $anon = function($tr) use($table) {
+        return function($match) use ($tr, $table) {
+            $var = $match[1];
+            $arr = explode('|', $var);
+            $var = array_shift($arr);
+            @ $var = $tr[$var];
+            foreach($arr as $call)
+                if(is_callable($table[$call]))
+                    $var = call_user_func($table[$call], $var);
+                elseif(is_callable($call))
+                    $var = call_user_func($call, $var);
+            return $var;
+        };
+    };
+    if(!$show_even_if_no_data and !$data): ;
+    else:
+        if(!$no_table):
+            $class = $class ? attr('class', $class) : '';
+            $style = $style ? attr('style', $style) : '';
+            $e = array();
+            foreach($extra as $k => $v) $e[] = attr($k, $v);
+            $extra = implode(' ', $e);
+            echo "<table cellspacing=\"0\" cellpadding=\"0\" {$class} {$style} {$extra}>", chr(10);
+        endif;
+        if($header):
+            $colspan = count($context);
+            echo "<tr><th colspan='{$colspan}'>{$header}</th></tr>", chr(10);
+        endif;
+        if(!$no_th):
+            $callback = $anon(array());
+            echo '<tr>', chr(10);
+            foreach($context as $key => $value) {
+                foreach(array_keys($value) as $k)
+                    if(strpos($k, 'td_') === 0)
+                        unset($value[$k]);
+                    elseif(strpos($k, '_') === 0)
+                        unset($value[$k]);
+                    elseif($k === 'content')
+                        unset($value[$k]);
+                    elseif(strpos($k, 'th_') === 0) {
+                        $value[substr($k, strlen('th_'))] = $value[$k];
+                        unset($value[$k]);
+                    }
+                $th = array();
+                foreach(array_filter($value) as $k => $v) {
+                    $v = preg_replace_callback($regex, $callback, $v);
+                    $th[] = attr($k, $v);
+                }
+                $th = implode(' ', $th);
+                echo "<th {$th}>{$key}</th>", chr(10);
+            }
+            echo '</tr>', chr(10);
+        endif;
+        foreach($data as $tr):
+            $callback = $anon($tr);
+            $decorator = $tr_decorator ? $tr_decorator($tr) : '';
+            $tr = $decorator ? "<tr {$decorator}>" : '<tr>';
+            echo $tr, chr(10);
+            foreach($context as $key => $value) {
+                @ $content = $value['content'];
+                foreach(array_keys($value) as $k)
+                    if(strpos($k, 'th_') === 0)
+                        unset($value[$k]);
+                    elseif(strpos($k, '_') === 0)
+                        unset($value[$k]);
+                    elseif($k === 'content')
+                        unset($value[$k]);
+                    elseif(strpos($k, 'td_') === 0) {
+                        $value[substr($k, strlen('td_'))] = $value[$k];
+                        unset($value[$k]);
+                    }
+                $content = preg_replace_callback($regex, $callback, $content);
+                $td = array();
+                foreach(array_filter($value) as $k => $v) {
+                    $v = preg_replace_callback($regex, $callback, $v);
+                    $td[] = attr($k, $v);
+                }
+                $td = implode(' ', $td);
+                echo "<td {$td}>{$content}</td>", chr(10);
+            }
+            echo '</tr>', chr(10);
+        endforeach;
+        if(!$no_table) echo '</table>', chr(10);
+    endif;
