@@ -1,0 +1,27 @@
+<?php
+    return array(
+        '09' => function($string, $generator, $param) {
+            $range = implode('|', range('0', '9'));
+            return generator("[{$range}]", $generator, $param);
+        },
+        'az' => function($string, $generator, $param) {
+            $range = implode('|', range('a', 'z'));
+            return generator("[{$range}]", $generator, $param);
+        },
+        '09az' => function($string, $generator, $param) {
+            $range = array_merge(range("0", "9"), range("a", "z"));
+            $range = implode('|', $range);
+            return generator("[{$range}]", $generator, $param);
+        },
+        'rotate' => function($lexeme, $generator, $param) {
+            preg_match_all($r = '~{([^}]*)}~', $lexeme, $match);
+            if(!$match) return $lexeme;
+            $arr = $match[1];
+            @ $seed = $param['seed'];
+            mt_shuffle($arr, $seed);
+            return preg_replace_callback($r, function($m) use(& $arr) {
+                return array_pop($arr);
+            }, $lexeme);
+        },
+        'newline' => function() { return chr(10); }
+    );
