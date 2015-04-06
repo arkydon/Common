@@ -1,0 +1,185 @@
+/* ---------------------------------------------------------------------- */
+                                  Host: CPU
+/* ---------------------------------------------------------------------- */
+
+    total time:                          1.6019s
+    total number of events:              1000
+    total time taken by event execution: 3.2013
+
+/* ---------------------------------------------------------------------- */
+                                 Docker: CPU
+/* ---------------------------------------------------------------------- */
+
+    total time:                          1.5432s
+    total number of events:              1000
+    total time taken by event execution: 3.0831
+
+/* ---------------------------------------------------------------------- */
+                            Host: I/O Test seqwr
+/* ---------------------------------------------------------------------- */
+
+500Mb total file size
+Operations performed:  0 Read, 32000 Write, 128 Other = 32128 Total
+Read 0b  Written 500Mb  Total transferred 500Mb  (17.306Mb/sec)
+    total time:                          28.8918s
+    total number of events:              32000
+    total time taken by event execution: 0.9968
+
+/* ---------------------------------------------------------------------- */
+                           Docker: I/O Test seqwr
+/* ---------------------------------------------------------------------- */
+
+500Mb total file size
+Operations performed:  0 Read, 32000 Write, 128 Other = 32128 Total
+Read 0b  Written 500Mb  Total transferred 500Mb  (16.414Mb/sec)
+    total time:                          30.4614s
+    total number of events:              32000
+    total time taken by event execution: 1.2253
+
+/* ---------------------------------------------------------------------- */
+                            Host: I/O Test seqrd
+/* ---------------------------------------------------------------------- */
+
+500Mb total file size
+Operations performed:  0 Read, 0 Write, 0 Other = 0 Total
+Read 0b  Written 0b  Total transferred 0b  (0b/sec)
+    total time:                          0.0016s
+    total number of events:              2
+    total time taken by event execution: 0.0002
+
+/* ---------------------------------------------------------------------- */
+                           Docker: I/O Test seqrd
+/* ---------------------------------------------------------------------- */
+
+500Mb total file size
+Operations performed:  0 Read, 0 Write, 0 Other = 0 Total
+Read 0b  Written 0b  Total transferred 0b  (0b/sec)
+    total time:                          0.0015s
+    total number of events:              2
+    total time taken by event execution: 0.0003
+
+/* ---------------------------------------------------------------------- */
+                            Host: I/O Test rndwr
+/* ---------------------------------------------------------------------- */
+
+500Mb total file size
+Operations performed:  0 Read, 1000 Write, 1280 Other = 2280 Total
+Read 0b  Written 15.625Mb  Total transferred 15.625Mb  (338.52Kb/sec)
+    total time:                          47.2651s
+    total number of events:              1000
+    total time taken by event execution: 0.0832
+
+/* ---------------------------------------------------------------------- */
+                           Docker: I/O Test rndwr
+/* ---------------------------------------------------------------------- */
+
+500Mb total file size
+Operations performed:  0 Read, 1000 Write, 1280 Other = 2280 Total
+Read 0b  Written 15.625Mb  Total transferred 15.625Mb  (343.39Kb/sec)
+    total time:                          46.5946s
+    total number of events:              1000
+    total time taken by event execution: 0.0855
+
+/* ---------------------------------------------------------------------- */
+                            Host: I/O Test rndrd
+/* ---------------------------------------------------------------------- */
+
+500Mb total file size
+Operations performed:  0 Read, 0 Write, 0 Other = 0 Total
+Read 0b  Written 0b  Total transferred 0b  (0b/sec)
+    total time:                          0.0016s
+    total number of events:              2
+    total time taken by event execution: 0.0003
+
+/* ---------------------------------------------------------------------- */
+                           Docker: I/O Test rndrd
+/* ---------------------------------------------------------------------- */
+
+500Mb total file size
+Operations performed:  0 Read, 0 Write, 0 Other = 0 Total
+Read 0b  Written 0b  Total transferred 0b  (0b/sec)
+    total time:                          0.0016s
+    total number of events:              2
+    total time taken by event execution: 0.0002
+
+/* ---------------------------------------------------------------------- */
+                         Host: Memory Test seq read
+/* ---------------------------------------------------------------------- */
+
+    total time:                          507.9727s
+    total number of events:              104857600
+    total time taken by event execution: 761.8406
+
+/* ---------------------------------------------------------------------- */
+                        Docker: Memory Test seq read
+/* ---------------------------------------------------------------------- */
+
+    total time:                          510.3670s
+    total number of events:              104857600
+    total time taken by event execution: 765.3557
+
+/* ---------------------------------------------------------------------- */
+                         Host: Memory Test rnd read
+/* ---------------------------------------------------------------------- */
+
+    total time:                          507.7453s
+    total number of events:              104857600
+    total time taken by event execution: 761.4226
+
+/* ---------------------------------------------------------------------- */
+                        Docker: Memory Test rnd read
+/* ---------------------------------------------------------------------- */
+
+    total time:                          510.1243s
+    total number of events:              104857600
+    total time taken by event execution: 765.0990
+
+/* ---------------------------------------------------------------------- */
+                         Host: Memory Test seq write
+/* ---------------------------------------------------------------------- */
+
+    total time:                          510.8716s
+    total number of events:              104857600
+    total time taken by event execution: 766.6226
+
+/* ---------------------------------------------------------------------- */
+                        Docker: Memory Test seq write
+/* ---------------------------------------------------------------------- */
+
+    total time:                          508.7936s
+    total number of events:              104857600
+    total time taken by event execution: 763.4182
+
+/* ---------------------------------------------------------------------- */
+                         Host: Memory Test rnd write
+/* ---------------------------------------------------------------------- */
+
+    total time:                          506.1475s
+    total number of events:              104857600
+    total time taken by event execution: 759.2424
+
+/* ---------------------------------------------------------------------- */
+                        Docker: Memory Test rnd write
+/* ---------------------------------------------------------------------- */
+
+    total time:                          506.8105s
+    total number of events:              104857600
+    total time taken by event execution: 759.9666
+
+/* ---------------------------------------------------------------------- */
+                             Host: Network Test
+/* ---------------------------------------------------------------------- */
+
+Testing download speed........................................
+Download: 433.87 Mbit/s
+Testing upload speed..................................................
+Upload: 72.80 Mbit/s
+
+/* ---------------------------------------------------------------------- */
+                            Docker: Network Test
+/* ---------------------------------------------------------------------- */
+
+Testing download speed........................................
+Download: 509.77 Mbit/s
+Testing upload speed..................................................
+Upload: 137.51 Mbit/s
