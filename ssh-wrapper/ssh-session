@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#
+# SSH SESSION
+# touch ~/.ssh/ssh-session
+# chmod 700 ~/.ssh/ssh-session
+#
+LOGIN=${LOGIN:-root}
+PORT=${PORT:-22}
+KEY=${KEY:-~/.ssh/id_rsa}
+
+declare -a args
+count=0
+for arg in "$@"; do
+    args[count]=$(printf '%q' "$arg")
+    count=$((count + 1))
+done
+
+if test -z "$TUNNEL"; then :; else TUNNEL="-fNL $TUNNEL"; fi
+if test -z "$EXTRA"; then :; else EXTRA="$EXTRA"; fi
+if [ ! -z "$PASSWD" ]; then
+    temp=$(mktemp)
+    echo "echo '$PASSWD'" > "$temp"
+    chmod a+x "$temp"
+    export SSH_ASKPASS="$temp"
+    setsid ssh -p "$PORT" $EXTRA $TUNNEL "$LOGIN"@"$HOST" "${args[@]}"
+    rm -f "$temp"
+else
+    ssh -p "$PORT" -i "$KEY" $EXTRA $TUNNEL "$LOGIN"@"$HOST" "${args[@]}"
+fi
