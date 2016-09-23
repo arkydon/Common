@@ -1,1 +1,1 @@
-[http://ejz.ru/10/ос-своими-руками-часть-3-grub](http://ejz.ru/10/ос-своими-руками-часть-3-grub)
+http://ejz.ru/10/os-svoimi-rukami-chast-3-grub

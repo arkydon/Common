@@ -1,1 +1,1 @@
-[http://ejz.ru/15/загадка-эйнштейна-на-питоне](http://ejz.ru/15/загадка-эйнштейна-на-питоне)
+http://ejz.ru/15/zagadka-einshteina-na-pitone

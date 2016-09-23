@@ -1,1 +1,1 @@
-[http://ejz.ru/47/собираем-аватарки-с-гугла](http://ejz.ru/47/собираем-аватарки-с-гугла)
+http://ejz.ru/47/sobiraem-avatarki-s-gugla

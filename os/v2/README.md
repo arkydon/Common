@@ -1,1 +1,1 @@
-[http://ejz.ru/9/ос-своими-руками-часть-2](http://ejz.ru/9/ос-своими-руками-часть-2)
+http://ejz.ru/9/os-svoimi-rukami-chast-2

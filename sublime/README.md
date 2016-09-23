@@ -1,3 +1,3 @@
-[http://ejz.ru/64/настройка-sublime-text](http://ejz.ru/64/настройка-sublime-text)
+http://ejz.ru/64/nastroika-sublime-text
 
-Ключ - [http://hostinger.su/threads/181/](http://hostinger.su/threads/181/)
+Key: http://hostinger.su/threads/181/
