@@ -1,1 +1,1 @@
-http://ejz.ru/37/kak-skryt-referer
+https://ejz.ru/37/kak-skryt-referer

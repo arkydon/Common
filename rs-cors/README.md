@@ -1,1 +1,1 @@
-http://ejz.ru/549/rackspace-stavim-cors-zagolovki
+https://ejz.ru/549/rackspace-stavim-cors-zagolovki

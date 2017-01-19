@@ -1,1 +1,1 @@
-http://ejz.ru/1/carnage-bot
+https://ejz.ru/1/carnage-bot

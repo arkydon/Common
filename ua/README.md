@@ -1,1 +1,1 @@
-http://ejz.ru/24/polnyi-user-agent-spisok
+https://ejz.ru/24/polnyi-user-agent-spisok

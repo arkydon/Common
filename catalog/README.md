@@ -1,1 +1,1 @@
-http://ejz.ru/78/yandex-liveinternet-mail-list-catalogs
+https://ejz.ru/78/yandex-liveinternet-mail-list-catalogs

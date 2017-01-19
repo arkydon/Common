@@ -1,1 +1,1 @@
-http://ejz.ru/104/proizvoditelnost-docker
+https://ejz.ru/104/proizvoditelnost-docker

@@ -1,1 +1,1 @@
-http://ejz.ru/65/zashchita-ot-skype
+https://ejz.ru/65/zashchita-ot-skype

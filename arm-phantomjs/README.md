@@ -1,1 +1,1 @@
-http://ejz.ru/119/compile-phantomjs-arm
+https://ejz.ru/119/compile-phantomjs-arm

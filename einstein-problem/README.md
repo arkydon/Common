@@ -1,1 +1,1 @@
-http://ejz.ru/15/zagadka-einshteina-na-pitone
+https://ejz.ru/15/zagadka-einshteina-na-pitone
