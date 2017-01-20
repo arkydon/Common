@@ -32,3 +32,5 @@ c=`cat all.txt | grep -c .`
 echo "ALL: ${c}"
 
 cat all.txt | parallel --no-notice -j 32 "$this" "{}" > hosts.txt
+cat hosts.txt | awk '{print "127.0.0.1 " $1}' > hosts.new.txt
+mv hosts.new.txt hosts.txt
